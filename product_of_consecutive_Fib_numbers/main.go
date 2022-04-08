@@ -5,30 +5,7 @@ import (
 	"math"
 )
 
-// func ProductFib(prod uint64) [3]uint64 {
-// 	// your code
-// 	var result [3]uint64
-// 	var fib, fibB, fibC uint64
-// 	var i uint64 = 0
-// 	for {
-// 		i++
-// 		fib = Fibo(i)
-// 		fibB = Fibo(i + 1)
-// 		fibC = Fibo(i + 2)
-// 		if fib*fibB == prod {
-// 			result[0] = fib
-// 			result[1] = fibB
-// 			result[2] = 1
-// 			return result
-// 		} else if fib*fibB < prod && fibB*fibC > prod {
-// 			result[0] = fibB
-// 			result[1] = fibC
-// 			result[2] = 0
-// 			return result
-// 		}
-// 	}
-
-// }
+var fibos []int
 
 func ProductFib(prod uint64) [3]uint64 {
 	// your code
@@ -38,7 +15,7 @@ func ProductFib(prod uint64) [3]uint64 {
 	var i uint64 = 0
 	for {
 		i++
-		fib = Fibo(i)
+		fib = Fibonacci(i)
 		if fib*fibStore == prod {
 			result[0] = fibStore
 			result[1] = fib
@@ -51,7 +28,7 @@ func ProductFib(prod uint64) [3]uint64 {
 				result[1] = fib
 			} else {
 				result[0] = fib
-				result[1] = Fibo(i + 1)
+				result[1] = Fibonacci(i + 1)
 			}
 			result[2] = 0
 			return result
@@ -66,6 +43,20 @@ func Fibo(n uint64) uint64 {
 	}
 
 	return Fibo(n-1) + Fibo(n-2)
+}
+
+func Fibonacci(n uint64) uint64 {
+	if n <= 1 {
+		return uint64(n)
+	}
+
+	var n2, n1 uint64 = 0, 1
+
+	for i := uint64(2); i < n; i++ {
+		n2, n1 = n1, n1+n2
+	}
+
+	return n2 + n1
 }
 
 func FindNearestFibo(x uint64) uint64 {
