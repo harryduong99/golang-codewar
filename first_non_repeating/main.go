@@ -6,7 +6,6 @@ import (
 )
 
 func FirstNonRepeating(str string) string {
-	//your code here
 	toLower := strings.ToLower(str)
 	originChars := strings.Split(str, "")
 	chars := strings.Split(toLower, "")
