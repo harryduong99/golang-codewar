@@ -75,3 +75,17 @@ func main() {
 	// fmt.Println(Fibo(8))
 	fmt.Println(ProductFib(800))
 }
+
+// FINEST PRACTICE!!!
+func ProductFibBest(prod uint64) [3]uint64 {
+	f1 := uint64(0)
+	f2 := uint64(1)
+	for f1*f2 < prod {
+	  f1, f2 = f2, f1+f2
+	}
+	success := uint64(0)
+	if prod == f1*f2 {
+	  success = 1
+	}
+	return [3]uint64{f1, f2, success}
+  }
