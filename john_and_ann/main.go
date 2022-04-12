@@ -20,7 +20,11 @@ func Ann(n int) []int {
 			toAppend = 1
 		} else {
 			t = result[i-1]
-			toAppend = i - John(t + 1)[t]
+			if len(resultJ)-1 < t+1 {
+				toAppend = i - John(t + 1)[t]
+			} else {
+				toAppend = i - resultJ[t]
+			}
 		}
 		result = append(result, toAppend)
 
@@ -43,7 +47,11 @@ func John(n int) []int {
 			toAppend = 0
 		} else {
 			t = resultJ[i-1]
-			toAppend = i - Ann(t + 1)[t]
+			if len(resultA)-1 < t+1 {
+				toAppend = i - Ann(t + 1)[t]
+			} else {
+				toAppend = i - resultA[t]
+			}
 		}
 
 		result = append(result, toAppend)
@@ -58,12 +66,16 @@ func John(n int) []int {
 }
 
 func SumJohn(n int) int {
-	John(n)
+	if len(totalsJ)-1 < n {
+		John(n)
+	}
 	return totalsJ[n-1]
 }
 
 func SumAnn(n int) int {
-	Ann(n)
+	if len(totalsA)-1 < n {
+		Ann(n)
+	}
 	return totalsA[n-1]
 }
 
