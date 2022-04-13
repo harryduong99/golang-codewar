@@ -38,6 +38,7 @@ func Ann(n int) []int {
 	return result
 }
 
+// Todo: should have a method that could be used by both ann() and john()
 func John(n int) []int {
 	var result []int
 	var t int
