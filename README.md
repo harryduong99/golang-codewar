@@ -1,4 +1,4 @@
 # Introduction
 
 
-A prject for algorithm and data structure implementation with golang
+A prject for algorithms and data structures implementation with golang
