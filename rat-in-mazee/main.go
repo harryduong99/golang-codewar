@@ -12,7 +12,7 @@ var (
 	maze [N][N]int
 )
 
-func printSolution() {
+func printSolution(sol [N][N]int) {
 	for i := 0; i < N; i++ {
 		for j := 0; j < N; j++ {
 			fmt.Printf(strconv.Itoa(sol[i][j]))
@@ -43,6 +43,7 @@ func solveMazeUtil(maze [N][N]int, x int, y int, sol [N][N]int) bool {
 	// if (x, y is goal) return true
 	if x == N-1 && y == N-1 && maze[x][y] == 1 {
 		sol[x][y] = 1
+		printSolution(sol)
 		return true
 	}
 	// Check if maze[x][y] is valid
@@ -102,5 +103,4 @@ func main() {
 
 	initSol()
 	solveMaze(maze)
-	printSolution()
 }
