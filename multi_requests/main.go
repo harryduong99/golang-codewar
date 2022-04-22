@@ -61,12 +61,12 @@ func main() {
 	endpointData := [][]string{
 		{
 			"https://mason-test-01.myshopify.com/payments_apps/api/2021-10/graphql.json",
-			"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",
+			"xxx",
 			"gid://shopify/PaymentSession/qun47Gkp3V2EAz3CV9hunlc-",
 		},
 		{
 			"https://mason-test-01.myshopify.com/payments_apps/api/2021-10/graphql.json",
-			"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",
+			"xxx",
 			"gid://shopify/PaymentSession/d8T--POVJK5FCNfEZjr7vg9a",
 		},
 	}
