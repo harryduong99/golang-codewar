@@ -101,6 +101,59 @@ func (s *singlyList) InsertAtIndex(index int, value int) {
 	s.len++
 }
 
+func (s *singlyList) DeleteAtHead() {
+	if s.head == nil {
+		fmt.Errorf("Empty linked list")
+		return
+	}
+
+	s.head = s.head.next
+	s.len--
+}
+
+func (s *singlyList) DeleteAtTail() {
+	if s.head == nil {
+		fmt.Errorf("removeBack: List is empty")
+		return
+	}
+	var prev *node
+	current := s.head
+	for current.next != nil {
+		prev = current
+		current = current.next
+	}
+	if prev != nil {
+		prev.next = nil
+	} else {
+		s.head = nil
+	}
+	s.len--
+	return
+}
+
+func (s *singlyList) DeleteAtIndex(index int) {
+	if s.head == nil || index < 0 {
+		return
+	}
+
+	if index == 0 {
+		s.DeleteAtHead()
+		return
+	}
+
+	if index >= s.len-1 {
+		s.DeleteAtTail()
+		return
+	}
+
+	prev := s.GetNodeAtIndex(index - 1)
+	delete := s.GetNodeAtIndex(index)
+
+	prev.next = delete.next
+
+	s.len--
+}
+
 func main() {
 	singleList := initList()
 	singleList.InsertAtIndex(0, 1)
