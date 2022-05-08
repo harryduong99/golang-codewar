@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+// const orders = [
+//     {  doctorId: 996, amount: 30500.35, tax: 0.06, isDisputed: true, isShipped: true },
+//     {  doctorId: 910, amount: 100, tax: 0.08, isDisputed: true },
+//     {  doctorId: 912, amount: 4200.11, tax: 0.06 },
+//     {  doctorId: 996, amount: 99.12, tax: 0.06, isDisputed: false },
+//     {  doctorId: 910, amount: 0.00, tax: 0.08, isShipped: true },
+//     {  doctorId: 996, amount: 10, tax: 0.06, isDisputed: true },
+// ];    
+
+// let cal = 0
+// let totalNumberOfOrder = 0
+// let totalDisputedOrder = 0 
+// let totalDisputedAmount = 0 
+// let totalAmount = 0 
+// let totalUniqueUsers = 0 
+// let totalAverageSale = 0
+
+// let users = []
+// let saleAverage;
+// let result = {}
+
+// result = orders.reduce((total, currentValue, index) => {
+//     totalNumberOfOrder++
+//     totalAmount += (currentValue.amount) * (1 + currentValue.tax)
+//     if (currentValue.isDisputed) {
+//         totalDisputedOrder++
+//         totalDisputedAmount += (currentValue.amount) * (1 + currentValue.tax)
+//     }
+
+//     if (!users.includes(currentValue.doctorId)) {
+//         users.push(currentValue.doctorId)
+//         totalUniqueUsers++
+//     }
+
+//     if (index == orders.length - 1) {
+//         saleAverage = totalAmount / totalUniqueUsers
+//         result[ 'Total number of orders' ] = totalNumberOfOrder
+//         result[ 'Total disputed orders' ] = totalDisputedOrder
+//         result[ 'Total disputed amount (included tax)' ] = totalDisputedAmount
+//         result[ 'Total amount (included tax)' ] = totalAmount
+//         result[ 'Total unique users' ] = totalUniqueUsers
+//         result[ 'Total average sales per unique user' ] = saleAverage
+//     }
+    
+//     return result
+// }, orders[0]);
+// console.log(result)
+
+
+// var messageStatuses = ['New', 'Pending', 'Open', 'Resolved', 'Unread', 'Read'];
+
+// let acceptedUserTypes = [2,3,6]
+// let senderMsgStatus = acceptedUserTypes.includes(userDetails.user_type) && payloadData.msg_status
+//     ? payloadData.msg_status
+//     : messageStatuses[1];
+
+// let receiverMsgStatus = messageStatuses[0];
+
+// let isDoctorToLab = (senderData.user_type == 4 || senderData.user_type == 5) && (receiverData.user_type == 2 || receiverData.user_type == 6)
+// let isLabtoProducer = (senderData.user_type == 2 || (isEmployee(userDetails) && isLabEmployee(userDetails))) && receiverData.user_type == 3
+
+// if (isDoctorToLab || isLabtoProducer) {
+//   senderMsgStatus =
+//     senderLastMessageStatus && (senderLastMessageStatus != messageStatuses[3] || receiverLastMessageStatus != messageStatuses[3])
+//       ? senderLastMessageStatus
+//       : senderMsgStatus;
+//   //new or open
+//   receiverMsgStatus = receiverLastMessageStatus ? messageStatuses[2] : messageStatuses[0];
+// }
+
+// let isLabToDocter = (receiverData.user_type == 4 || receiverData.user_type == 5) &&
+//     (senderData.user_type == 2 || senderData.user_type == 6 || senderData.user_type == 8)
+// let isProducerTolab = receiverData.user_type == 2 && senderData.user_type == 3
+
+// if (isLabToDocter || isProducerTolab) {
+//   //pending or resolved.
+//   senderMsgStatus = payloadData.msg_status || senderMsgStatus;
+//   //Unread
+//   receiverMsgStatus = messageStatuses[4];
+// }
+
+// let getFirstDayOfFirstWeek = (year) => {
+//     const day = new Date("Jan 4, " + year)
+//     let gap = day.getDay() - 1
+//     day.setDate(day.getDate() - gap)
+//     return day.toISOString().split('T')[0]
+// }
+
+// console.log(getFirstDayOfFirstWeek(2010))
+
+const verifyUser = function(username, password, callback){
+   dataBase.verifyUser(username, password, (error, userInfo) => {
+       if (error) {
+           callback(error)
+       }else{
+           dataBase.getRoles(username, (error, roles) => {
+               if (error){
+                   callback(error)
+               }else {
+                   dataBase.logAccess(username, (error) => {
+                       if (error){
+                           callback(error);
+                       }else{
+                           callback(null, userInfo, roles);
+                       }
+                   })
+               }
+           })
+       }
+   })
+};
+
+const verifyUser = async (username, password) => {
+    // Let use async/await to avoid callback hell
+    try {
+        const userInfo = await dataBase.verifyUser(username, password);
+        const rolesInfo = await dataBase.getRoles(userInfo);
+        const logStatus = await dataBase.logAccess(userInfo);
+        
+        return userInfo;
+    }catch (e){
+        
+    }
+};
+
+const chai = require('chai')
+const expect = chai.expect
+
+const validator = require('../verifyUser')
+
+describe("Check verifyUser()", () => {
+    it("should wrong username", ()=> {
+        expect(validator.verifyUser("Harryx", "Duong")).to.be.false
+    })
+
+    it("should wrong password", ()=> {
+        expect(validator.verifyUser("Harry", "Duongx")).to.be.false
+    })
+
+    it("should wrong user and password", ()=> {
+        expect(validator.verifyUser("Harryx", "Duongx")).to.be.false
+    })
+
+    it("should pass the validator", () => {
+        expect(validator.verifyUser("Harry", "Duong")).to.be.true
+    })
+
+})
+
+// https://viblo.asia/p/asynchronous-javascript-tu-callback-hell-cho-den-async-va-await-naQZRyJQKvx
+     </script>
+</body>
+</html>
