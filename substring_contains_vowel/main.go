@@ -21,7 +21,9 @@ func vowelsubstring(s string) int32 {
 				break
 			}
 
-			vowel = append(vowel, c[j])
+			if !contains(vowel, c[j]) {
+				vowel = append(vowel, c[j])
+			}
 
 			if len(vowel) == 5 {
 				total++
@@ -31,6 +33,16 @@ func vowelsubstring(s string) int32 {
 	}
 
 	return int32(total)
+}
+
+func contains(slice []string, item string) bool {
+	set := make(map[string]struct{}, len(slice))
+	for _, s := range slice {
+		set[s] = struct{}{}
+	}
+
+	_, ok := set[item]
+	return ok
 }
 
 func isVowel(x string) bool {
