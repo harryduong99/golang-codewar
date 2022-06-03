@@ -125,6 +125,24 @@ func (g *Graph) ReDFS(startingNode string) {
 	g.recursiveDFS(startingNode, visited)
 }
 
+func (g *Graph) DFS(startingNode string) {
+	visited := g.initVisited()
+	var stack []string
+	visited[startingNode] = true
+	stack = append(stack, startingNode)
+
+	for len(stack) > 0 {
+		current := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		// for _, node := range g.adjacency[current] {
+		// 	if !visited[node] {
+		// 		visited[node] = true
+		// 		stack = append(stack, node)
+		// 	}
+		// }
+	}
+}
+
 func (g *Graph) recursiveDFS(startingNode string, visited map[string]bool) {
 	visited[startingNode] = true
 	fmt.Println("DFS", startingNode)
