@@ -13,6 +13,9 @@ func isBalanced(s string) string {
 
 	for _, c := range brackets {
 		if c == ")" || c == "]" || c == "}" {
+			if len(stack) == 0 {
+				return "NO"
+			}
 			top = stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
 
@@ -28,6 +31,6 @@ func isBalanced(s string) string {
 }
 
 func main() {
-	demo := "{[(])}"
+	demo := "}([[{)[]))]{){}["
 	log.Println(isBalanced(demo))
 }
